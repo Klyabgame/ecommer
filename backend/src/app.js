@@ -14,7 +14,7 @@ var connection = {
   database: "",
 };
 
-//para evitar futuras desconecciones (inicio)
+//para evitar futuras desconeccioness (inicio)
 var conexion;
 function handleDisconnect() {
   conexion = mysql.createConnection(connection);
