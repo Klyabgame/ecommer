@@ -1,3 +1,4 @@
+//bienvenidos a el ApiRestFull del ecommerce desarrollado en react
 const express = require("express");
 const cors = require("cors");
 const mysql = require("mysql");
