@@ -35,7 +35,7 @@ function handleDisconnect() {
 }
 handleDisconnect();
 
-//(final)
+//(finall)
 
 app.get("/", function (req, res) {
   res.send("ruta INICIO");
