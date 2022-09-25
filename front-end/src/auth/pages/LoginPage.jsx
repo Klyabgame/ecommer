@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Field, Form, Formik } from "formik";
-import { validationScheme, initalValuesLogin } from "../formik";
+import { validationSchemeLogin, initalValuesLogin } from "../formik";
 import { AuthLayout } from "../Layout/AuthLayout";
 import { Error } from "../components/Error";
 import { Button } from "../components/Button";
@@ -14,11 +14,11 @@ export const LoginPage = () => {
 
   return (
     <AuthLayout>
-      <h2 className="text-3xl font-semibold my-6">Iniciar sesión</h2>
+      <h2 className="text-3xl font-semibold my-3">Iniciar sesión</h2>
       <Formik
         onSubmit={handleSubmit}
         initialValues={initalValuesLogin}
-        validationSchema={validationScheme}
+        validationSchema={validationSchemeLogin}
       >
         {({ values, errors, touched }) => (
           <Form>
@@ -38,7 +38,7 @@ export const LoginPage = () => {
                 <Error message={errors.email} />
               )}
             </div>
-            <div className="mb-6">
+            <div className="">
               <label htmlFor="password" className="block mb-2 text-slate-500">
                 Password
               </label>
