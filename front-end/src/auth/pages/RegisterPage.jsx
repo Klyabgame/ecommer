@@ -8,7 +8,7 @@ import { Error } from "../components/Error";
 
 export const RegisterPage = () => {
   return (
-    <AuthLayout className="my-8 md:my-6">
+    <AuthLayout className="my-8 md:my-0">
       <div>
         <h2 className="text-3xl font-semibold my-3 mb-6">Registro</h2>
 
