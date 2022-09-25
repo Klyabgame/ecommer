@@ -1,15 +1,11 @@
 import * as Yup from "yup";
 
-<<<<<<< HEAD
-export const validationScheme = Yup.object({
-=======
 export const initalValuesLogin = {
   email: "",
   password: "",
 };
 
 export const validationSchemeLogin = Yup.object({
->>>>>>> kevinDev
   email: Yup.string()
     .email("Correo no válido")
     .required("El correo es requerido"),
@@ -18,28 +14,15 @@ export const validationSchemeLogin = Yup.object({
     .required("La contraseña es requerida"),
 });
 
-<<<<<<< HEAD
-export const initalValuesLogin = {
-=======
 export const initalValuesRegister = {
   dni: "",
   nombre: "",
   apellidoPaterno: "",
   apellidoMaterno: "",
->>>>>>> kevinDev
   email: "",
   password: "",
 };
 
-<<<<<<< HEAD
-
-export const initalValuesRegister = {
-  dni: "",
-  name: "",
-  lastname: "",
-
-}
-=======
 export const validationSchemeRegister = Yup.object({
   dni: Yup.string()
     .min(8, "El DNI debe tener 8 caracteres")
@@ -54,4 +37,3 @@ export const validationSchemeRegister = Yup.object({
     .min(6, "La contraseña debe tener un máximo de 6 caracteres")
     .required("La contraseña es requerida"),
 });
->>>>>>> kevinDev
