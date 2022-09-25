@@ -63,6 +63,51 @@ app.get('/api/registroUsuario', (req,res)=>{
   })
 });
 
+//mostrar registro
+app.get('/api/registroUsuario/:id', (req,res)=>{
+  conexion.query('SELECT * FROM tb_usuario WHERE id_usuario=?',[req.params.id], (error,fila)=>{
+      if(error){
+          throw error;
+
+      }else{
+          res.send(fila);
+      }
+  })
+});
+
+//insertar registro
+
+app.post('/api/registroUsuario',(req,res)=>{
+  /* let idRol =req.params.idRol; */
+  let dni=req.body.dni;
+  let nombre=req.body.nombre;
+  let apellidoPaterno=req.body.apellidoPaterno;
+  let apellidoMaterno=req.body.apellidoMaterno;
+  let direccion=req.body.direccion;
+  let contacto1=req.body.contacto1;
+  let contacto2=req.body.contacto2;
+  let fechaNacimiento=req.body.fechaNacimiento;
+  let email=req.body.email;
+  let password=req.body.password;
+  let foto=req.body.foto;
+  let idRol=req.body.idRol;
+  let data={dni,nombre,apellidoPaterno,apellidoMaterno,direccion,contacto1,contacto2,fechaNacimiento,email,password,foto,idRol}
+  let sql="INSERT INTO tb_usuario SET ?";
+  conexion.query(sql, data, function(error, results){
+      if(error){
+          throw error;
+
+      }else{
+          Object.assign(data,{id:results.insertId});
+          res.send(data);
+          
+      }
+  });
+});
+//editar registro
+
+//eliminar registro
+
 
 //-------------------------------------------------------------------------------------------------------------------->
 //ROL CRUD
@@ -93,11 +138,11 @@ app.get('/api/rol/:id', (req,res)=>{
 
 //para insertar
 app.post('/api/rol',(req,res)=>{
-  let idRol =req.params.idRol;
+  /* let idRol =req.params.idRol; */
   let tipoRol=req.body.tipoRol;
-  let data=[tipoRol,idRol]
-  /* let sql="INSERT INTO rol SET ?"; */
-  let sql="INSERT INTO `rol` (`idRol`, `tipoRol`) VALUES ('?', '?')"
+  let data={tipoRol}
+  let sql="INSERT INTO rol SET ?";
+  /* let sql="INSERT INTO `rol` (`idRol`, `tipoRol`) VALUES ('?', '?')" */
   conexion.query(sql, data, function(error, results){
       if(error){
           throw error;
