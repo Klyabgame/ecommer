@@ -26,6 +26,7 @@ export const initalValuesRegister = {
 export const validationSchemeRegister = Yup.object({
   dni: Yup.string()
     .min(8, "El DNI debe tener 8 caracteres")
+    .max(8, "El DNI debe tener 8 caracteres")
     .required("El DNI es requerido"),
   nombre: Yup.string().required("El nombre es requerido"),
   apellidoPaterno: Yup.string().required("El apellido paterno es requerido"),

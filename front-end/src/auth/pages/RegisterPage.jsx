@@ -21,12 +21,15 @@ export const RegisterPage = () => {
               <div className="w-full mb-3">
                 <label className="block mb-2 text-slate-500">DNI</label>
                 <Field
-                  type="text"
+                  type="number"
                   name="dni"
                   placeholder="DNI"
                   className="w-full p-3 bg-gray-50 outline-none border rounded-lg transition-all"
                   value={values.dni}
                   autoComplete="off"
+                  // max={8}
+                  maxLength={8}
+                  // minLength={8}
                 />
                 {errors.dni && touched.dni && <Error message={errors.dni}/>}
               </div>
