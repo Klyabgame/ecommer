@@ -85,7 +85,7 @@ app.get('/api/registroUsuario/:id', (req,res)=>{
   })
 });
 
-//insertar registro
+//insertar registroo
 
 app.post('/api/registroUsuario',(req,res)=>{
   /* let idRol =req.params.idRol; */
