@@ -7,12 +7,22 @@ const app= express();
 app.use(express.json());
 app.use(cors());
 
-const connection=({
+//CONEXION POR GODADDY------------------------------------------------------------------------------------------->
+var connection= ({
+  host:'72.167.87.128',
+  user:'franz2',
+  password:'12345',
+  database:'ecommerce'
+});
+
+
+//CONEXION POR HEROKU------------------------------------------------------------------------------------------->
+/* const connection=({
   host:'us-cdbr-east-06.cleardb.net',
   user:'bd81d39baf9f5d',
   password:'f1970e88',
   database:'heroku_e70b6afe379c951',
-});
+}); */
 //primaformadeconectarmeala bd
 /* connection.connect(function(error){
   if(error){
@@ -53,7 +63,7 @@ app.get("/", function (req, res) {
 //REGISTRO CRUD------------------------------------------------------------------------------------------------------>
 //ver tablas registro
 app.get('/api/registroUsuario', (req,res)=>{
-  conexion.query('SELECT * FROM tb_usuario', (error,filas)=>{
+  conexion.query('SELECT * FROM USUARIO', (error,filas)=>{
       if(error){
           throw error;
 
@@ -63,13 +73,58 @@ app.get('/api/registroUsuario', (req,res)=>{
   })
 });
 
+//mostrar registro
+app.get('/api/registroUsuario/:id', (req,res)=>{
+  conexion.query('SELECT * FROM USUARIO WHERE idUsuario=?',[req.params.id], (error,fila)=>{
+      if(error){
+          throw error;
+
+      }else{
+          res.send(fila);
+      }
+  })
+});
+
+//insertar registro
+
+app.post('/api/registroUsuario',(req,res)=>{
+  /* let idRol =req.params.idRol; */
+  let dni=req.body.dni;
+  let nombre=req.body.nombre;
+  let apellidoPaterno=req.body.apellidoPaterno;
+  let apellidoMaterno=req.body.apellidoMaterno;
+  let direccion=req.body.direccion;
+  let contacto1=req.body.contacto1;
+  let contacto2=req.body.contacto2;
+  let fechaNacimiento=req.body.fechaNacimiento;
+  let email=req.body.email;
+  let password=req.body.password;
+  let foto=req.body.foto;
+  let idRol=req.body.idRol;
+  let data={dni,nombre,apellidoPaterno,apellidoMaterno,direccion,contacto1,contacto2,fechaNacimiento,email,password,foto,idRol}
+  let sql="INSERT INTO USUARIO SET ?";
+  conexion.query(sql, data, function(error, results){
+      if(error){
+          throw error;
+
+      }else{
+          Object.assign(data,{id:results.insertId});
+          res.send(data);
+          
+      }
+  });
+});
+//editar registro
+
+//eliminar registro
+
 
 //-------------------------------------------------------------------------------------------------------------------->
 //ROL CRUD
 //ver tablas rol
 
 app.get('/api/rol', (req,res)=>{
-  conexion.query('SELECT * FROM rol', (error,filas)=>{
+  conexion.query('SELECT * FROM ROL', (error,filas)=>{
       if(error){
           throw error;
 
@@ -81,7 +136,7 @@ app.get('/api/rol', (req,res)=>{
 
 //mostrar solo un ROL
 app.get('/api/rol/:id', (req,res)=>{
-  conexion.query('SELECT * FROM rol WHERE idRol=?',[req.params.id], (error,fila)=>{
+  conexion.query('SELECT * FROM ROL WHERE idRol=?',[req.params.id], (error,fila)=>{
       if(error){
           throw error;
 
@@ -93,11 +148,11 @@ app.get('/api/rol/:id', (req,res)=>{
 
 //para insertar
 app.post('/api/rol',(req,res)=>{
-  let idRol =req.params.idRol;
+  /* let idRol =req.params.idRol; */
   let tipoRol=req.body.tipoRol;
-  let data=[tipoRol,idRol]
-  /* let sql="INSERT INTO rol SET ?"; */
-  let sql="INSERT INTO `rol` (`idRol`, `tipoRol`) VALUES ('?', '?')"
+  let data={tipoRol}
+  let sql="INSERT INTO ROL SET ?";
+  /* let sql="INSERT INTO `rol` (`idRol`, `tipoRol`) VALUES ('?', '?')" */
   conexion.query(sql, data, function(error, results){
       if(error){
           throw error;
@@ -115,7 +170,7 @@ app.post('/api/rol',(req,res)=>{
 app.put('/api/rol/:id', (req,res)=>{
   let idRol =req.params.idRol;
   let tipoRol=req.body.tipoRol;
-  let sql="UPDATE rol SET tipoRol=? WHERE idRol=?";
+  let sql="UPDATE ROL SET tipoRol=? WHERE idRol=?";
   conexion.query(sql,[tipoRol,idRol], function(error,results){
       if(error){
           throw error;
@@ -129,7 +184,7 @@ app.put('/api/rol/:id', (req,res)=>{
 
 //eliminar articulos
 app.delete('/api/rol/:id', (req,res)=>{
-  conexion.query('DELETE FROM rol WHERE idRol=?', [req.params.id],function(error,filas){
+  conexion.query('DELETE FROM ROL WHERE idRol=?', [req.params.id],function(error,filas){
       if(error){
           throw error;
 
