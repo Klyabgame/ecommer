@@ -155,7 +155,7 @@ app.delete('/api/registroUsuario/:id', (req,res)=>{
 });
 
 
-//VALIDAR USUARIO Y PASSWORD
+//VALIDAR USUARIO Y PASSWORDd
 app.post('/api/registroUsuario/auth', (req, res)=> {
 	let usser = req.body.usser;
 	let password = req.body.password;
