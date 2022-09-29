@@ -1,11 +1,12 @@
 export const register = async (form) => {
-  form.id = "1";
+  form.idRol = "1";
+  console.log(form);
 
   try {
     const result = await fetch("http://localhost:3000/api/auth/crearUsuario", {
       method: "POST",
       headers: {
-        ContentType: "application/json",
+        'Content-Type':'application/json'
       },
       body: JSON.stringify(form),
     });
@@ -14,6 +15,7 @@ export const register = async (form) => {
       ok: true,
       ...result,
     };
+
   } catch (error) {
     console.log("error al hacer el fetch");
     return {
