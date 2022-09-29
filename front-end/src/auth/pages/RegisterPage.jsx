@@ -3,10 +3,21 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "../components/Button";
 import { AuthLayout } from "../Layout/AuthLayout";
-import { initalValuesRegister, validationSchemeRegister } from "../formik";
+import {
+  initalValuesRegister,
+  validationSchemeRegister,
+} from "../formik/schema";
 import { Error } from "../components/Error";
+import { useDispatch } from "react-redux";
+import { startRegisterUser } from "../../store/auth/thunks";
 
 export const RegisterPage = () => {
+  const dispatch = useDispatch();
+
+  const handleSubmit = (values) => {
+    dispatch(startRegisterUser(values));
+  };
+
   return (
     <AuthLayout className="my-8 md:my-0">
       <div>
@@ -15,6 +26,7 @@ export const RegisterPage = () => {
         <Formik
           initialValues={initalValuesRegister}
           validationSchema={validationSchemeRegister}
+          onSubmit={handleSubmit}
         >
           {({ values, errors, touched }) => (
             <Form className="md:grid grid-cols-2 gap-x-3">
@@ -27,11 +39,8 @@ export const RegisterPage = () => {
                   className="w-full p-3 bg-gray-50 outline-none border rounded-lg transition-all"
                   value={values.dni}
                   autoComplete="off"
-                  // max={8}
-                  maxLength={8}
-                  // minLength={8}
                 />
-                {errors.dni && touched.dni && <Error message={errors.dni}/>}
+                {errors.dni && touched.dni && <Error message={errors.dni} />}
               </div>
               <div className="w-full mb-3">
                 <label className="block mb-2 text-slate-500">Nombre</label>
@@ -43,8 +52,9 @@ export const RegisterPage = () => {
                   value={values.nombre}
                   autoComplete="off"
                 />
-                {errors.nombre && touched.nombre && <Error message={errors.nombre}/>}
-                
+                {errors.nombre && touched.nombre && (
+                  <Error message={errors.nombre} />
+                )}
               </div>
               <div className="w-full mb-3">
                 <label className="block mb-2 text-slate-500">
@@ -55,11 +65,12 @@ export const RegisterPage = () => {
                   name="apellidoPaterno"
                   placeholder="Apellido Paterno"
                   className="w-full p-3 bg-gray-50 outline-none border rounded-lg transition-all"
-                  value={values.apellidoMaterno}
+                  value={values.apellidoPaterno}
                   autoComplete="off"
                 />
-                {errors.apellidoMaterno && touched.apellidoMaterno && <Error message={errors.apellidoMaterno}/>}
-
+                {errors.apellidoMaterno && touched.apellidoMaterno && (
+                  <Error message={errors.apellidoPaterno} />
+                )}
               </div>
               <div className="w-full mb-3">
                 <label className="block mb-2 text-slate-500">
@@ -73,8 +84,9 @@ export const RegisterPage = () => {
                   value={values.apellidoMaterno}
                   autoComplete="off"
                 />
-                {errors.apellidoMaterno && touched.apellidoMaterno && <Error message={errors.apellidoMaterno}/>}
-
+                {errors.apellidoMaterno && touched.apellidoMaterno && (
+                  <Error message={errors.apellidoMaterno} />
+                )}
               </div>
               <div className="w-full">
                 <label className="block mb-2 text-slate-500">Email</label>
@@ -85,27 +97,27 @@ export const RegisterPage = () => {
                   className="w-full p-3 bg-gray-50 outline-none border rounded-lg transition-all"
                   value={values.email}
                   autoComplete="off"
-                  
                 />
-                {errors.email && touched.email && <Error message={errors.email}/>}
-
+                {errors.email && touched.email && (
+                  <Error message={errors.email} />
+                )}
               </div>
               <div className="w-full">
                 <label className="block mb-2 text-slate-500">Password</label>
                 <Field
-                  type="text"
+                  type="password"
                   name="password"
                   placeholder="Password"
                   className="w-full p-3 bg-gray-50 outline-none border rounded-lg transition-all"
                   value={values.password}
                   autoComplete="off"
                 />
-                {errors.password && touched.password && <Error message={errors.password}/>}
+                {errors.password && touched.password && (
+                  <Error message={errors.password} />
+                )}
               </div>
 
-              <Button className="col-span-full w-full">
-                Registrame
-              </Button>
+              <Button className="col-span-full w-full">Registrame</Button>
             </Form>
           )}
         </Formik>
