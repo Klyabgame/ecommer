@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Field, Form, Formik } from "formik";
-import { validationSchemeLogin, initalValuesLogin } from "../formik";
+import { validationSchemeLogin, initalValuesLogin } from "../formik/schema";
 import { AuthLayout } from "../Layout/AuthLayout";
 import { Error } from "../components/Error";
 import { Button } from "../components/Button";

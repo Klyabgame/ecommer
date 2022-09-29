@@ -15,12 +15,12 @@ export const validationSchemeLogin = Yup.object({
 });
 
 export const initalValuesRegister = {
-  dni: "",
-  nombre: "",
-  apellidoPaterno: "",
-  apellidoMaterno: "",
-  email: "",
-  password: "",
+  dni: "75958291",
+  nombre: "Kevin",
+  apellidoPaterno: "Cespedes",
+  apellidoMaterno: "Alvarez",
+  email: "kevincespedes@gmail.com",
+  password: "123456",
 };
 
 export const validationSchemeRegister = Yup.object({
