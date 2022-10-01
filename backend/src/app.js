@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(indexRoutes);
 app.use(authRoutes);
 
-// app.get("/api/registroUsuario  ", (req, res) => {
+// app.get("/api/registroUsuarios  ", (req, res) => {
 //   connection.query("SELECT  * FROM USUARIO", (error, filas) => {
 //     if (error) {
 //       throw error;
