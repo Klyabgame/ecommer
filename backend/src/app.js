@@ -35,7 +35,7 @@ app.use(authRoutes);
 //   );
 // });
 
-// //insertar registroo
+// //insertarss registroo
 
 // app.post("/api/registroUsuario", (req, res) => {
 //   /* let idRol =req.params.idRol; */
