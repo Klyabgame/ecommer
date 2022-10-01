@@ -1,5 +1,5 @@
 export const register = async (data) => {
-  form.idRol = "1";
+  data.idRol = "1";
   try {
     const result = await fetch("http://localhost:3000/api/auth/crearUsuario", {
       method: "POST",
@@ -22,6 +22,4 @@ export const register = async (data) => {
   }
 };
 
-export const login = async(form) => {
 
-}
