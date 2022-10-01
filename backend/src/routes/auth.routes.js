@@ -37,13 +37,35 @@ router.post("/api/auth/crearUsuario", (req, res) => {
   };
 
   data.password = encryptPassword(password);
+  let sqlSearchEmail = `SELECT * FROM USUARIO WHERE email = '${email}'`;
+  let sqlSearchDni = `SELECT * FROM USUARIO WHERE dni = '${dni}'`;
   let sql = "INSERT INTO USUARIO SET ?";
-  connection.query(sql, data, function (error, results) {
+  connection.query(sqlSearchEmail, function (error, result) {
     if (error) {
       throw error;
     } else {
-      data.id = results.insertId;
-      res.send(data);
+      if (result.length > 0) {
+        res.send({ ok: false, message: "Email ya existe" });
+      } else {
+        connection.query(sqlSearchDni, function (error, result) {
+          if (error) {
+            throw error;
+          } else {
+            if (result.length > 0) {
+              res.send({ ok: false, message: "DNI ya existe" });
+            } else {
+              connection.query(sql, data, function (error, result) {
+                if (error) {
+                  throw error;
+                } else {
+                  data.id = result.insertId;
+                  res.send(data);
+                }
+              });
+            }
+          }
+        });
+      }
     }
   });
 });
@@ -66,7 +88,7 @@ router.post("/api/auth/login", (req, res) => {
           res.send({ ok: false, message: "Contraseña incorrecta" });
         }
       } else {
-        res.send({ ok: false, message: "Usuario no existe" });
+        res.send({ ok: false, message: "Correo incorrecto" });
       }
     }
   });
