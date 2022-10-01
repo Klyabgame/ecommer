@@ -1,24 +1,25 @@
-import { register } from "../../auth/helpers";
-import { checkingCreditionals, login } from "../auth/authSlice";
+import { loginUser, registerUser } from "../../auth/helpers";
+import { checkingCreditionals, login, logout } from "../auth/authSlice";
 
 export const startRegisterUser = (data) => {
   return async (dispatch) => {
     dispatch(checkingCreditionals());
 
-    const result = await register(data);
+    const result = await registerUser(data);
 
-    if (!result.ok) {
-      return console.log("hacer algo con el error");
-    }
+    if (!result.ok) return dispatch(logout(result));
     dispatch(login(result));
   };
 };
 
 export const startLoginUser = (data) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(checkingCreditionals());
 
+    const result = await loginUser(data);
 
-    
-  }
+    if (!result.ok) return dispatch(logout(result));
+
+    dispatch(login(result));
+  };
 };

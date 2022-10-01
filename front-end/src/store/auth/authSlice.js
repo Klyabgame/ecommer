@@ -36,11 +36,29 @@ export const authSlice = createSlice({
       state.telefono = payload.telefono || null;
       state.idRol = payload.idRol;
       state.foto = payload.foto || null;
+      state.errorMessage = null;
     },
     checkingCreditionals: (state) => {
       state.status = "checking";
     },
+    logout: (state, { payload }) => {
+      state.status = "not-authenticated";
+      state.id = payload.id;
+      state.nombre = payload.nombre;
+      state.fechaNacimiento = payload.fechaNacimiento || null;
+      state.dni = payload.dni;
+      state.email = payload.email;
+      state.apellidoPaterno = payload.apellidoPaterno;
+      state.apellidoMaterno = payload.apellidoMaterno;
+      state.direcion = payload.direcion || null;
+      state.contacto1 = payload.contacto1;
+      state.contacto2 = payload.contacto2 || null;
+      state.telefono = payload.telefono || null;
+      state.idRol = payload.idRol;
+      state.foto = payload.foto || null;
+      state.errorMessage = payload.message;
+    },
   },
 });
 
-export const { login, checkingCreditionals } = authSlice.actions;
+export const { login, checkingCreditionals, logout } = authSlice.actions;
