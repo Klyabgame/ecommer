@@ -5,11 +5,17 @@ import { validationSchemeLogin, initalValuesLogin } from "../formik/schema";
 import { AuthLayout } from "../Layout/AuthLayout";
 import { Error } from "../components/Error";
 import { Button } from "../components/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { startLoginUser } from "../../store/auth/thunks";
+import { ErrorAuth } from "../components/ErrorAuth";
 
 export const LoginPage = () => {
+  const dispatch = useDispatch();
+  const { errorMessage } = useSelector((state) => state.auth);
+
   const handleSubmit = (values) => {
     //TODO: hacer la consulta a la base de datos
-    console.log(values);
+    dispatch(startLoginUser(values));
   };
 
   return (
@@ -30,7 +36,9 @@ export const LoginPage = () => {
                 type="text"
                 name="email"
                 autoComplete="off"
-                className={`w-full p-3 bg-gray-50 outline-none border rounded-lg transition-all ${errors.email && touched.email && "border-red-500"}`}
+                className={`w-full p-3 bg-gray-50 outline-none border rounded-lg transition-all ${
+                  errors.email && touched.email && "border-red-500"
+                }`}
                 placeholder="correo"
                 value={values.email}
               />
@@ -46,15 +54,17 @@ export const LoginPage = () => {
                 type="password"
                 name="password"
                 autoComplete="off"
-                className={`w-full p-3 bg-gray-50 outline-none border rounded-lg transition-all ${errors.password && touched.password && "border-red-500"}`}
+                className={`w-full p-3 bg-gray-50 outline-none border rounded-lg transition-all ${
+                  errors.password && touched.password && "border-red-500"
+                }`}
                 placeholder="password"
                 value={values.password}
               />
               {errors.password && touched.password && (
                 <Error message={errors.password} />
               )}
+              {!!errorMessage && <ErrorAuth message={errorMessage} />}
             </div>
-
             <Button>Ingresar</Button>
             <div className="flex justify-between mt-7">
               <p className="text-slate-500">¿Aún no tienes cuenta?</p>

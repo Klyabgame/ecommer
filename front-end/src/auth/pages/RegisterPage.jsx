@@ -8,10 +8,14 @@ import {
   validationSchemeRegister,
 } from "../formik/schema";
 import { Error } from "../components/Error";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { startRegisterUser } from "../../store/auth/thunks";
+import { ErrorAuth } from "../components/ErrorAuth";
 
 export const RegisterPage = () => {
+
+  const { errorMessage } = useSelector((state) => state.auth);
+
   const dispatch = useDispatch();
 
   const handleSubmit = (values) => {
@@ -116,7 +120,9 @@ export const RegisterPage = () => {
                   <Error message={errors.password} />
                 )}
               </div>
-
+              {
+                !!errorMessage && <ErrorAuth message={errorMessage}/>
+              }
               <Button className="col-span-full w-full">Registrame</Button>
             </Form>
           )}
