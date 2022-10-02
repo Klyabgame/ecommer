@@ -1,8 +1,8 @@
 import { createPool } from "mysql2";
 
 export const connection = createPool({
-  host: "72.167.87.128",
-  user: "franz2",
-  password: "12345",
-  database: "ecommerce",
+  host: "65.109.53.171",
+  user: "schwartz_franz",
+  password: "Ecommerce123",
+  database: "schwartz_Proyecto_ecommerce",
 });
