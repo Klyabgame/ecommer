@@ -4,5 +4,5 @@ export const ErrorAuth = ({ message }) => {
       <i className="fa-solid fa-triangle-exclamation text-red-500"></i>
       <p className="text-red-700 font-semibold">{message}</p>
     </div>
-  );s
+  );
 };

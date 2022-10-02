@@ -21,5 +21,6 @@ export const startLoginUser = (data) => {
     if (!result.ok) return dispatch(logout(result));
 
     dispatch(login(result));
+    localStorage.setItem("token", result.token);
   };
 };

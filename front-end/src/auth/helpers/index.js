@@ -46,3 +46,24 @@ export const loginUser = async (data) => {
     };
   }
 };
+
+export const generateNewToken = async (token) => {
+  try {
+    const response = await fetch("http://localhost:3000/api/renew", {
+      headers: {
+        "x-token": token,
+      },
+    });
+
+    const dataUser = await response.json();
+    return {
+      ok: true,
+      ...dataUser,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      ok: false,
+    };
+  }
+};

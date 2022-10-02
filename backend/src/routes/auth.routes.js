@@ -2,6 +2,8 @@ import { Router } from "express";
 import { connection } from "../db.js";
 import bycrypt from "bcrypt";
 import { encryptPassword } from "../helpers/encryptPassword.js";
+import { generateJWT } from "../helpers/jwt.js";
+import { revalidateToken } from "../middleware/revalidateToken.js";
 
 const router = Router();
 
@@ -40,6 +42,7 @@ router.post("/api/auth/crearUsuario", (req, res) => {
   let sqlSearchEmail = `SELECT * FROM USUARIO WHERE email = '${email}'`;
   let sqlSearchDni = `SELECT * FROM USUARIO WHERE dni = '${dni}'`;
   let sql = "INSERT INTO USUARIO SET ?";
+
   connection.query(sqlSearchEmail, function (error, result) {
     if (error) {
       throw error;
@@ -54,11 +57,14 @@ router.post("/api/auth/crearUsuario", (req, res) => {
             if (result.length > 0) {
               res.send({ ok: false, message: "DNI ya existe" });
             } else {
-              connection.query(sql, data, function (error, result) {
+              connection.query(sql, data, async function (error, result) {
                 if (error) {
                   throw error;
                 } else {
+                  delete data.password;
+                  const token = await generateJWT(result[0]);
                   data.id = result.insertId;
+                  data.token = token;
                   res.send(data);
                 }
               });
@@ -70,12 +76,12 @@ router.post("/api/auth/crearUsuario", (req, res) => {
   });
 });
 
-router.post("/api/auth/login", (req, res) => {
+router.post("/api/auth/login", async (req, res) => {
   let email = req.body.email;
   let password = req.body.password;
 
   let sqlForUser = `SELECT * FROM USUARIO WHERE email='${email}'`;
-  connection.query(sqlForUser, function (error, result) {
+  connection.query(sqlForUser, async function (error, result) {
     if (error) {
       throw error;
     } else {
@@ -83,6 +89,10 @@ router.post("/api/auth/login", (req, res) => {
         const passwordEncrypt = result[0].password;
         const passwordCompare = bycrypt.compareSync(password, passwordEncrypt);
         if (passwordCompare) {
+          delete result[0].password;
+
+          const token = await generateJWT(result[0]);
+          result[0].token = token;
           res.send(result[0]);
         } else {
           res.send({ ok: false, message: "Contraseña incorrecta" });
@@ -91,6 +101,18 @@ router.post("/api/auth/login", (req, res) => {
         res.send({ ok: false, message: "Correo incorrecto" });
       }
     }
+  });
+});
+
+router.get("/api/renew", revalidateToken, async (req, res) => {
+  const payloadToken = req.body;
+
+  const token = await generateJWT(payloadToken);
+
+  res.send({
+    ok: true,
+    ...payloadToken,
+    token
   });
 });
 

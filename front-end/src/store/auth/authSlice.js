@@ -43,20 +43,20 @@ export const authSlice = createSlice({
     },
     logout: (state, { payload }) => {
       state.status = "not-authenticated";
-      state.id = payload.id;
-      state.nombre = payload.nombre;
-      state.fechaNacimiento = payload.fechaNacimiento || null;
-      state.dni = payload.dni;
-      state.email = payload.email;
-      state.apellidoPaterno = payload.apellidoPaterno;
-      state.apellidoMaterno = payload.apellidoMaterno;
-      state.direcion = payload.direcion || null;
-      state.contacto1 = payload.contacto1;
-      state.contacto2 = payload.contacto2 || null;
-      state.telefono = payload.telefono || null;
-      state.idRol = payload.idRol;
-      state.foto = payload.foto || null;
-      state.errorMessage = payload.message;
+      state.id = null;
+      state.nombre = null;
+      state.fechaNacimiento = null;
+      state.dni = null;
+      state.email = null;
+      state.apellidoPaterno = null;
+      state.apellidoMaterno = null;
+      state.direcion = null;
+      state.contacto1 = null;
+      state.contacto2 = null;
+      state.telefono = null;
+      state.idRol = null;
+      state.foto = null;
+      state.errorMessage = payload?.message || null;
     },
   },
 });

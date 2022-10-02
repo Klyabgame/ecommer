@@ -11,10 +11,11 @@ import { Error } from "../components/Error";
 import { useDispatch, useSelector } from "react-redux";
 import { startRegisterUser } from "../../store/auth/thunks";
 import { ErrorAuth } from "../components/ErrorAuth";
+import { Spinner } from "../components/Spinner";
 
 export const RegisterPage = () => {
 
-  const { errorMessage } = useSelector((state) => state.auth);
+  const { errorMessage, status } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
 
@@ -123,7 +124,11 @@ export const RegisterPage = () => {
               {
                 !!errorMessage && <ErrorAuth message={errorMessage}/>
               }
-              <Button className="col-span-full w-full">Registrame</Button>
+              {
+                status === "checking" 
+                ? <Spinner />
+                : <Button className="col-span-full w-full">Registrame</Button>
+              }
             </Form>
           )}
         </Formik>
