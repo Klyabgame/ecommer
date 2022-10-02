@@ -8,13 +8,13 @@ import { Button } from "../components/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { startLoginUser } from "../../store/auth/thunks";
 import { ErrorAuth } from "../components/ErrorAuth";
+import { Spinner } from "../components/Spinner";
 
 export const LoginPage = () => {
   const dispatch = useDispatch();
-  const { errorMessage } = useSelector((state) => state.auth);
+  const { errorMessage, status } = useSelector((state) => state.auth);
 
   const handleSubmit = (values) => {
-    //TODO: hacer la consulta a la base de datos
     dispatch(startLoginUser(values));
   };
 
@@ -65,7 +65,9 @@ export const LoginPage = () => {
               )}
               {!!errorMessage && <ErrorAuth message={errorMessage} />}
             </div>
-            <Button>Ingresar</Button>
+
+            {status === "checking" ? <Spinner /> : <Button>Ingresar</Button>}
+
             <div className="flex justify-between mt-7">
               <p className="text-slate-500">¿Aún no tienes cuenta?</p>
               <Link
