@@ -11,7 +11,7 @@ export const authSlice = createSlice({
     email: null,
     apellidoPaterno: null,
     apellidoMaterno: null,
-    direcion: null,
+    direccion: null,
     contacto1: null,
     contacto2: null,
     telefono: null,
@@ -30,7 +30,7 @@ export const authSlice = createSlice({
       state.email = payload.email;
       state.apellidoPaterno = payload.apellidoPaterno;
       state.apellidoMaterno = payload.apellidoMaterno;
-      state.direcion = payload.direcion || null;
+      state.direccion = payload.direcion || null;
       state.contacto1 = payload.contacto1;
       state.contacto2 = payload.contacto2 || null;
       state.telefono = payload.telefono || null;
@@ -50,7 +50,7 @@ export const authSlice = createSlice({
       state.email = null;
       state.apellidoPaterno = null;
       state.apellidoMaterno = null;
-      state.direcion = null;
+      state.direccion = null;
       state.contacto1 = null;
       state.contacto2 = null;
       state.telefono = null;

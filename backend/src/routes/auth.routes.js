@@ -62,9 +62,10 @@ router.post("/api/auth/crearUsuario", (req, res) => {
                   throw error;
                 } else {
                   delete data.password;
-                  const token = await generateJWT(result[0]);
-                  data.id = result.insertId;
+                  const token = await generateJWT(data);
                   data.token = token;
+
+                  data.id = result.insertId;
                   res.send(data);
                 }
               });
@@ -76,12 +77,12 @@ router.post("/api/auth/crearUsuario", (req, res) => {
   });
 });
 
-router.post("/api/auth/login", async (req, res) => {
+router.post("/api/auth/login", (req, res) => {
   let email = req.body.email;
   let password = req.body.password;
 
   let sqlForUser = `SELECT * FROM USUARIO WHERE email='${email}'`;
-  connection.query(sqlForUser, async function (error, result) {
+  connection.query(sqlForUser, async (error, result) => {
     if (error) {
       throw error;
     } else {
@@ -112,7 +113,7 @@ router.get("/api/renew", revalidateToken, async (req, res) => {
   res.send({
     ok: true,
     ...payloadToken,
-    token
+    token,
   });
 });
 

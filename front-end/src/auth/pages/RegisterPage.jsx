@@ -127,7 +127,7 @@ export const RegisterPage = () => {
               {
                 status === "checking" 
                 ? <Spinner />
-                : <Button className="col-span-full w-full">Registrame</Button>
+                : <Button className="col-span-full">Registrame</Button>
               }
             </Form>
           )}

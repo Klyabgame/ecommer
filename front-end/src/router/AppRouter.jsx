@@ -15,7 +15,7 @@ export const AppRouter = () => {
   useEffect(() => {
     const checkAuthToken = async () => {
       const token = localStorage.getItem("token");
-      if (!token) {
+      if (!token || token === undefined) {
         return dispatch(logout());
       }
 
