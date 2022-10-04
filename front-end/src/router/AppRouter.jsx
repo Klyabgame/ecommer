@@ -25,6 +25,7 @@ export const AppRouter = () => {
 
       if (!result.ok) return dispatch(logout());
 
+      console.log(token)
       dispatch(login(result));
       localStorage.setItem("token", result.token);
     };

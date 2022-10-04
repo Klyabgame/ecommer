@@ -7,7 +7,7 @@ export const startLoadingProducts = () => {
 
     const result = await getProducts();
 
-    if (!result.ok) return;
+    if (!result.ok) return localStorage.removeItem("token");
 
     dispatch(setProdroducts(result));
   };
