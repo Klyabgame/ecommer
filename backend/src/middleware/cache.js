@@ -1,4 +1,5 @@
-import ExpressExpeditious from 'express-expeditious'; 
+import ExpressExpeditious from 'express-expeditious';
+import ExpeditiousEngineMemory from 'expeditious-engine-memory'; 
 
 /* const defaultOptions = {
     namespace:'expresscache',
@@ -11,9 +12,9 @@ import ExpressExpeditious from 'express-expeditious';
 export const cache = ExpressExpeditious({
     // Namespace used to prevent cache conflicts, must be alphanumeric
     namespace: 'expresscache',
-  
+    engine: ExpeditiousEngineMemory(),
     // Store cache entries for 1 minute (can also pass milliseconds e.g 60000)
-    defaultTtl: '15 minute',
+    defaultTtl: '30 minutes',
     statusCodeExpires:{
         404:'5 minutes',
         500:'0'
