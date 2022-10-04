@@ -17,7 +17,7 @@ export const InputForm = ({
       <Field
         type={typeInput}
         autoComplete="off"
-        name={labelText}
+        name={nameInput}
         placeholder={placeholderInput}
         value={valueInput}
         className={`w-full p-2 outline-none bg-gray-50 border rounded-lg transition-all ${isReadOnly && "border-green-400" }`}

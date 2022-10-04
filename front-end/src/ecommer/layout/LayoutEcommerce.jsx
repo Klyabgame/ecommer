@@ -1,11 +1,11 @@
 import React from "react";
 import { NavBar } from "../components/NavBar";
 
-export const LayoutEcommerce = ({children}) => {
+export const LayoutEcommerce = ({children, className}) => {
   return (
-    <div className="h-screen bg-gray-100">
+    <div className="bg-gray-100">
       <NavBar />
-      <main className="md:max-w-7xl mx-auto px-3 md:px-0 my-5">
+      <main className={`md:max-w-7xl mx-auto px-3 mt-8 min-h-screen ${className}`}>
         {children}
       </main>
     </div>

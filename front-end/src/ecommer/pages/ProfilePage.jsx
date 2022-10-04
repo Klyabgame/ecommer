@@ -1,27 +1,46 @@
 import { Form, Formik } from "formik";
+import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { Button } from "../../auth/components/Button";
 import { InputForm } from "../components/InputForm";
 import { LayoutEcommerce } from "../layout/LayoutEcommerce";
 
+const examplePromise = (number) => {
+  return new Promise((resolve, reject) => {
+    if (number % 2 === 0) {
+      setTimeout(() => {
+        resolve();
+      }, 1500);
+    } else {
+      setTimeout(() => {
+        reject();
+      }, 1500);
+    }
+  });
+};
+
 export const ProfilePage = () => {
   const user = useSelector((state) => state.auth);
 
   const handleUpdateUser = (values) => {
-    console.log(values)
-    console.log(values.contacto1)
-  } 
+    console.log(values);
+    toast.promise(
+      examplePromise(4),
+      {
+        loading: "Cargando...",
+        success: <b>Guardado correctamente</b>,
+        error: <b>Hubo un error al guardar</b>,
+      }
+    );
+  };
 
   return (
     <>
       <LayoutEcommerce>
-        <h3 className="text-xl md:text-3xl font-bold">Mis datos personales</h3>
+        <h3 className="text-xl md:text-3xl font-bold mb-3 text-gray-800">Mis datos personales</h3>
         <hr />
 
-        <Formik 
-          initialValues={user}
-          onSubmit={handleUpdateUser}
-        >
+        <Formik initialValues={user} onSubmit={handleUpdateUser}>
           {({ values }) => (
             <Form className="w-full bg-white px-4 py-5 rounded-lg shadow-sm mt-5">
               <div className="md:grid grid-cols-3 gap-x-4">

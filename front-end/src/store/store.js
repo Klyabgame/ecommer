@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { authSlice } from "./auth/authSlice";
-import { ecommerSlice } from "./ecommer/ecommerSlice";
+import { ecommerceSlice } from "./ecommer/ecommerceSlice";
 
 export default configureStore({
   reducer: {
     auth: authSlice.reducer,
-    ecommer: ecommerSlice.reducer,
+    ecommerce: ecommerceSlice.reducer,
   },
 });

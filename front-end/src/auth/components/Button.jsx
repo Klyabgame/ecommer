@@ -1,4 +1,4 @@
-export const Button = ({ children, className }) => {
+export const Button = ({ children, className, ...props}) => {
   return (
     <button
       type="submit"

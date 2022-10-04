@@ -24,7 +24,7 @@ export const RegisterPage = () => {
   };
 
   return (
-    <AuthLayout className="my-8 md:my-0">
+    <AuthLayout className="my-8 md:my-0" containerAuthClass="md:-mt-12">
       <div>
         <h2 className="text-3xl font-semibold my-3 mb-6">Registro</h2>
 
@@ -127,7 +127,7 @@ export const RegisterPage = () => {
               {
                 status === "checking" 
                 ? <Spinner />
-                : <Button className="col-span-full">Registrame</Button>
+                : <Button className="col-span-full w-full">Registrame</Button>
               }
             </Form>
           )}
@@ -135,7 +135,7 @@ export const RegisterPage = () => {
         <div className="flex justify-between mt-7">
           <p className="text-slate-500">¿Ya tienes una cuenta?</p>
           <Link
-            to="auth/login"
+            to="/auth/login"
             className="text-blue-500 font-semibold hover:underline underline-offset-1"
           >
             Iniciar Sesión
